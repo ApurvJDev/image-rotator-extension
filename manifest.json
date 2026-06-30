@@ -1,0 +1,22 @@
+{
+    "manifest_version": 3,
+    "name": "Image Rotator",
+    "version": "1.0.0",
+    "description": "Double-click an image in a new tab to rotate it 90°",
+    "content_scripts": [
+      {
+        "matches": [
+          "*://*/*.jpg",
+          "*://*/*.jpeg",
+          "*://*/*.png",
+          "*://*/*.gif",
+          "*://*/*.webp",
+          "*://*/*.bmp",
+          "*://*/*.svg",
+          "*://*/*.avif"
+        ],
+        "js": ["content.js"],
+        "run_at": "document_idle"
+      }
+    ]
+  }
