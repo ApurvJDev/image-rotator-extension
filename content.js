@@ -3,8 +3,13 @@
  * Intended for Chrome's direct image viewer tabs.
  */
 (function initImageRotator() {
-    const img = findPrimaryImage();
-    if (!img) return;
+   const isImageViewerPage =
+    document.images.length === 1 &&
+    document.body.childElementCount === 1 &&
+    document.body.firstElementChild.tagName === "IMG";
+
+  if (!isImageViewerPage) return;
+    const img = document.images[0];
   
     let degrees = 0;
   
@@ -19,21 +24,3 @@
       img.style.transform = `rotate(${degrees}deg)`;
     });
   })();
-  
-  /**
-   * Returns the main image on a direct-image tab, or null.
-   */
-  function findPrimaryImage() {
-    const images = [...document.images];
-    if (images.length === 0) return null;
-  
-    // Direct image tab: usually one image, minimal page chrome
-    if (images.length === 1) return images[0];
-  
-    // Fallback: largest visible image
-    return images.reduce((largest, current) => {
-      const largestArea = largest.naturalWidth * largest.naturalHeight;
-      const currentArea = current.naturalWidth * current.naturalHeight;
-      return currentArea > largestArea ? current : largest;
-    });
-  }

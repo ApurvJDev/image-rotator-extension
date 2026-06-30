@@ -5,16 +5,8 @@
     "description": "Double-click an image in a new tab to rotate it 90°",
     "content_scripts": [
       {
-        "matches": [
-          "*://*/*.jpg",
-          "*://*/*.jpeg",
-          "*://*/*.png",
-          "*://*/*.gif",
-          "*://*/*.webp",
-          "*://*/*.bmp",
-          "*://*/*.svg",
-          "*://*/*.avif"
-        ],
+        "matches": ["<all_urls>"],
+        "match_origin_as_fallback": true,
         "js": ["content.js"],
         "run_at": "document_idle"
       }
